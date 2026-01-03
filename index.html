@@ -1,23 +1,584 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+    <!-- Schema.org Markup for Financial Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialProduct",
+      "name": "비갱신형 실손보험 비교 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "실손보험 비교 플랫폼",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "description": "2026년 최신 비갱신형 실손보험 정보를 제공하며, 갱신형/비갱신형 비교 및 맞춤형 견적 상담 서비스를 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "실손보험 상품 비교",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "비갱신형 실손보험 상품 1"
+            },
+            "description": "초기 보험료가 높지만 장기적으로 안정적인 납입이 가능한 상품."
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "갱신형 실손보험 상품 2"
+            },
+            "description": "초기 보험료가 낮고 갱신 시점마다 보험료가 재산정되는 상품."
+          }
+        ]
+      },
+      "url": "https://yourdomain.com"
+    }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f5f8fa; /* 부드러운 배경색 */
+            color: #333;
+        }
+        header {
+            background-color: #004d99; /* 메인 색상 (신뢰감을 주는 짙은 파랑) */
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #004d99; /* 메인 색상 */
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #004d99;
+            display: inline-block;
+            text-align: left;
+        }
+        h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 5px solid #007bff;
+        }
+        nav {
+            background-color: #007bff; /* 보조 색상 (header 하단 메뉴바) */
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            margin-bottom: 2.5rem;
+        }
+        section p, section ul, section dl {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f4f8;
+            color: #333;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .highlight {
+            font-weight: 700;
+            color: #c0392b; /* 강조 색상 (빨간색 계열) */
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #e67e22; /* 강조 색상 (주황색 계열) */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 2.5rem auto;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.4);
+            display: block;
+            max-width: 300px;
+        }
+        .cta-button:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+        .keyword-tags {
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .keyword-tags a {
+            background-color: #e3f2fd;
+            color: #007bff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .keyword-tags a:hover {
+            background-color: #bbdefb;
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #28a745;
+            font-weight: 700;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #888;
+            background-color: #e9ecef;
+            margin-top: 2rem;
+        }
+        .form-section {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+        .form-section label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 700;
+            color: #555;
+        }
+        .form-section input[type="text"], .form-section input[type="email"], .form-section input[type="tel"], .form-section select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-section input[type="text"]:focus, .form-section input[type="email"]:focus, .form-section input[type="tel"]:focus, .form-section select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-section button {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease;
+        }
+        .form-section button:hover {
+            background-color: #0056b3;
+        }
+        /* Chart specific styling (Placeholder for actual chart integration) */
+        .chart-container {
+            margin: 2rem 0;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            line-height: 300px;
+            color: #999;
+            font-weight: 700;
+            border: 1px dashed #ccc;
+        }
+
+        /* External Links Styling */
+        .external-links ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .external-links li {
+            margin-bottom: 15px;
+        }
+        .external-links li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .external-links li a:hover {
+            background-color: #e9ecef;
+        }
+        .external-links li a::before {
+            content: '🔗 ';
+            margin-right: 5px;
+            color: #007bff;
+        }
+        /* FAQ Accordion Styling */
+        dl dt {
+            cursor: pointer;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            background-color: #fafafa;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        dl dt:hover {
+            background-color: #f0f4f8;
+        }
+        dl dt::after {
+            content: '+';
+            float: right;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+        dl dt.active::after {
+            content: '-';
+        }
+        dl dd {
+            padding: 1rem;
+            background-color: #fff;
+            border-left: 3px solid #007bff;
+            margin-left: 0;
+            display: none;
+            transition: all 0.3s ease-in-out;
+        }
+        dl dt.active + dd {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>비갱신형 실손보험, 현명하게 선택하는 2026년 가이드</h1>
+        <p>갱신형 vs 비갱신형, 당신의 미래를 위한 최선의 선택은 무엇일까요?</p>
+    </header>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+        <ul>
+            <li><a href="#compare">갱신형 vs 비갱신형 비교</a></li>
+            <li><a href="#4gen">4세대 실손보험 분석</a></li>
+            <li><a href="#checklist">필수 체크리스트</a></li>
+            <li><a href="#faq">자주 묻는 질문</a></li>
+            <li><a href="#quote">무료 견적 상담</a></li>
+        </ul>
     </nav>
+
     <main>
-      <h1>Home page</h1>
+        <!-- Section 1: Introduction and Core Keyword Focus -->
+        <section id="introduction">
+            <h2>비갱신형 실손보험이란 무엇인가요?</h2>
+            <p><strong>비갱신형 실손보험</strong>은 계약 시 정한 보험료가 만기 시점까지 변동되지 않고 일정하게 유지되는 상품을 의미합니다. 이는 갱신형 실손보험과 가장 큰 차이점으로, 장기적인 재정 계획을 세우는 데 유리합니다. 특히 2026년 현재, 새로운 실손보험 상품은 대부분 갱신형으로 출시되고 있어 비갱신형 상품은 가입이 어렵거나 제한되는 추세입니다. 따라서 기존에 비갱신형 상품을 보유하고 계신 분들은 해지 전에 신중한 고려가 필요하며, 신규 가입자들은 갱신형 상품의 특징을 정확히 이해하고 준비해야 합니다. 이 페이지에서는 비갱신형 실손보험의 장단점을 심층적으로 분석하고, 2026년 실손보험 시장의 변화에 맞춰 합리적인 선택을 할 수 있도록 돕습니다.</p>
+
+            <h3>비갱신형 실손보험의 주요 특징</h3>
+            <ul>
+                <li><strong>보험료 안정성:</strong> 가입 시점의 보험료가 변동되지 않아 미래 보험료 인상에 대한 부담이 적습니다.</li>
+                <li><strong>장기 재정 계획:</strong> 보험료 지출을 예측할 수 있어 장기적인 재무 설계가 가능합니다.</li>
+                <li><strong>가입 제한:</strong> 현재 4세대 실손보험은 갱신형이 주류이며, 비갱신형 상품은 매우 제한적이거나 가입 연령이 낮습니다.</li>
+            </ul>
+
+            <div class="keyword-tags" aria-label="관련 실손보험 키워드">
+                <a href="#compare">실비보험 갱신형 비갱신형 차이</a>
+                <a href="#4gen">4세대 실손보험</a>
+                <a href="#checklist">실손보험 가입 조건</a>
+                <a href="#quote">비갱신 실손보험 견적</a>
+                <a href="#faq">실손보험 중복 가입</a>
+            </div>
+        </section>
+
+        <!-- Section 2: In-depth Comparison (갱신형 vs 비갱신형) with Table and Graph -->
+        <section id="compare">
+            <h2>갱신형 vs 비갱신형 실손보험, 무엇이 다를까요?</h2>
+            <p>실손보험 가입 시 가장 중요한 결정 요소는 갱신형과 비갱신형 중 어떤 것을 선택할지입니다. 두 가지 유형은 보험료 납입 방식, 보험료 변화 추이, 보장 기간 등에서 확연한 차이를 보입니다. 특히 2026년에는 보험료 산정 방식의 개편으로 인해 이 차이가 더욱 중요해지고 있습니다.</p>
+
+            <h3>1. 보험료 변화 추이 비교 분석 (갱신형 vs 비갱신형)</h3>
+            <p>갱신형은 초기 보험료가 매우 저렴하지만 갱신 주기(보통 1년)마다 보험료가 재산정되어 연령 증가, 의료 수가 상승, 손해율 악화 등의 요인으로 인해 보험료가 급격하게 상승할 수 있습니다. 반면 비갱신형은 초기 보험료가 다소 높지만, 정해진 납입 기간 동안 동일한 보험료를 유지하여 장기적으로 총 납입액이 갱신형보다 낮아지는 경우가 많습니다.</p>
+
+            <!-- Table for Comparison -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>비갱신형 실손보험</th>
+                        <th>갱신형 실손보험</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>보험료 변화</strong></td>
+                        <td>만기 시점까지 <span class="highlight">변동 없음</span> (일부 특약 제외)</td>
+                        <td>갱신 주기마다 <span class="highlight">변동</span> (연령, 손해율 등 반영)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>초기 보험료</strong></td>
+                        <td>상대적으로 <span class="highlight">높음</span></td>
+                        <td>상대적으로 <span class="highlight">낮음</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>장기 총 납입액</strong></td>
+                        <td>보통 갱신형보다 <span class="highlight">낮을 가능성 높음</span> (장기 유지 시)</td>
+                        <td><span class="highlight">가입 기간이 길어질수록</span> 높아질 가능성 높음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>재정 계획</strong></td>
+                        <td><span class="highlight">안정적</span>인 재정 계획 가능</td>
+                        <td><span class="highlight">불안정</span>하며, 갱신 시점마다 부담 증가 가능</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가입 가능 시점 (2026년 기준)</strong></td>
+                        <td><span class="highlight">매우 제한적</span> (4세대 상품은 대부분 갱신형)</td>
+                        <td><span class="highlight">일반적</span>인 가입 형태</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>시각적 비교 (보험료 추이 그래프)</strong>: 아래 그래프는 20대 남성 가입자를 가정하여 갱신형과 비갱신형의 보험료 변화를 시뮬레이션한 것입니다. 초기에는 갱신형이 유리하지만 40대 후반부터는 갱신형의 보험료가 비갱신형을 추월하며, 60대 이후에는 부담이 크게 증가하는 것을 볼 수 있습니다.</p>
+            <div class="chart-container">
+                <div class="chart-placeholder">
+                    [보험료 추이 시뮬레이션 그래프 삽입 공간: 갱신형 (급격한 상승), 비갱신형 (일정)]
+                </div>
+                <p><strong>Tip:</strong> 장기적으로 안정적인 납입을 원한다면 비갱신형을, 당장의 보험료 부담을 줄이고 싶다면 갱신형을 선택하는 것이 일반적입니다. 그러나 2026년 현 시점에서 신규 가입자에게 비갱신형 상품은 거의 선택의 여지가 없습니다.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Information on 4th Generation Insurance and Non-renewal -->
+        <section id="4gen">
+            <h2>4세대 실손보험과 비갱신형 상품의 관계 (2026년 최신 정보)</h2>
+            <p>2021년 7월부터 시행된 4세대 실손보험은 기존 실손보험의 높은 손해율을 개선하기 위해 도입되었습니다. 4세대 실손보험의 가장 큰 특징은 <span class="highlight">보험료 차등제</span> 도입과 <span class="highlight">재가입 주기 단축</span>(5년)입니다.</p>
+
+            <h3>1. 4세대 실손보험의 핵심 변화: 갱신형만 존재</h3>
+            <p>4세대 실손보험의 기본 구조는 1년 갱신, 5년 재가입 형태의 갱신형 상품으로 이루어져 있습니다. 즉, 2026년 현재 신규로 실손보험에 가입하는 모든 가입자는 갱신형 상품을 선택해야 합니다. 이는 과거 1세대, 2세대 실손보험에서 판매되었던 비갱신형 상품과는 근본적으로 다른 구조입니다. 따라서 '비갱신형 실손보험'을 신규로 찾는 소비자들은 4세대 상품에서 해당 선택지가 없다는 점을 명확히 인지해야 합니다.</p>
+
+            <h3>2. 비갱신형 실손보험의 희소성: 기존 가입자 주의사항</h3>
+            <p>현재 비갱신형 실손보험을 유지하고 있는 가입자들은 매우 유리한 위치에 있습니다. 4세대 상품의 보험료 차등제는 의료 이용량이 많은 사람의 보험료를 인상하는 방식이므로, 건강 관리를 잘 하는 사람에게는 갱신형이 유리할 수 있지만, 장기적으로 노후 의료비 지출이 늘어날 경우 갱신형의 부담이 커질 수 있습니다. 따라서 비갱신형 실손보험을 보유하고 있다면, 단순히 보험료가 올랐다는 이유로 해지하기보다는 전문가와의 상담을 통해 장기적인 관점에서 유지 여부를 결정하는 것이 중요합니다.</p>
+
+            <h3>3. 4세대 실손보험의 장점과 한계점</h3>
+            <p>4세대 실손보험은 비급여 항목에 대한 자기부담금이 높아지는 등 보장이 축소된 측면이 있지만, 비급여 항목 특약을 분리하여 보험료 부담을 줄이는 장점도 있습니다. 2026년 기준으로 4세대 실손보험 가입 시, 비급여 항목에 대한 자기부담금은 급여 항목보다 높게 책정되어 있습니다. 이로 인해 비급여 항목 이용이 잦은 경우 실질적인 혜택이 줄어들 수 있습니다.</p>
+            <p><strong>주요 변경 사항:</strong></p>
+            <ul class="check-list">
+                <li>비급여 특약 분리: 도수치료, 주사제, 자기공명영상(MRI) 등 3가지 특약으로 분리되어 필요에 따라 선택 가입 가능.</li>
+                <li>보험료 차등제: 1년간 비급여 보험금을 많이 수령한 가입자는 다음 해 보험료가 할증될 수 있음.</li>
+                <li>재가입 주기: 5년마다 상품 변경 가능.</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Choosing the Right Policy (Checklist for Non-renewable) -->
+        <section id="checklist">
+            <h2>비갱신형 실손보험 가입 시 고려해야 할 필수 체크리스트</h2>
+            <p>비갱신형 실손보험이 이미 있는 경우, 유지 여부를 결정할 때 신중해야 합니다. 또한 새로운 갱신형 상품을 선택해야 하는 신규 가입자도 아래 사항들을 참고하여 미래의 보험료 부담을 최소화할 수 있습니다.</p>
+
+            <h3>1. 가입 가능 연령 및 병력 확인</h3>
+            <p>비갱신형 상품은 갱신형 상품에 비해 가입 심사가 까다로운 경우가 많았습니다. 특히 과거에 가입했던 비갱신형 상품을 다시 복원하거나 전환하는 경우, 현재 건강 상태에 따라 가입이 거절될 수 있습니다. 2026년에는 유병력자도 가입 가능한 간편심사형 상품이 다양하게 출시되고 있지만, 보장 범위가 일반 상품보다 좁을 수 있습니다.</p>
+
+            <h3>2. 보험료 납입 기간과 만기 설정</h3>
+            <p>비갱신형 실손보험은 보통 10년, 20년, 30년 납입 등으로 설정됩니다. 납입 기간이 길수록 월 납입 보험료는 낮아지지만 총 납입액은 증가할 수 있습니다. 반면 갱신형 상품은 납입 기간과 갱신 주기를 혼동하지 않도록 유의해야 합니다.</p>
+
+            <h3>3. 특약(비급여 항목) 구성 및 자기부담금 확인</h3>
+            <p>실손보험은 기본 보장 외에 특약으로 추가 보장을 받을 수 있습니다. 비급여 항목인 도수치료, MRI 등에 대한 보장 여부와 자기부담금 비율을 반드시 확인해야 합니다. 4세대 실손보험은 비급여 항목에 대한 자기부담금이 급여 항목보다 높으므로, 평소 이용 빈도가 높은 항목을 신중하게 고려해야 합니다.</p>
+
+            <h3>4. 보험금 지급 조건 및 면책 사항</h3>
+            <p>보험금 지급이 거절되는 면책 사항을 미리 확인해야 합니다. 예를 들어, 미용 목적의 치료, 비급여 주사제 중 일부, 건강검진 비용 등은 실손보험에서 보장하지 않는 경우가 많습니다. 약관을 꼼꼼히 읽어보고 궁금한 점은 반드시 상담을 통해 확인하세요.</p>
+        </section>
+
+        <!-- Section 5: Dwell Time Optimization (Interactive Form) -->
+        <section id="quote" class="form-section">
+            <h2>나에게 맞는 실손보험 견적 무료 상담 신청</h2>
+            <p>수십 가지 상품 중에서 나에게 가장 적합한 실손보험을 찾는 것은 쉽지 않습니다. 갱신형/비갱신형의 장단점을 고려하여 개인별 맞춤 견적을 제공해 드립니다. 아래 정보를 입력하시면 전문가가 2026년 최신 보험 상품을 기준으로 무료 상담을 진행해 드립니다.</p>
+            <form action="#" method="post">
+                <label for="name">이름:</label>
+                <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+
+                <label for="phone">연락처:</label>
+                <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요 (예: 010-1234-5678)" required>
+
+                <label for="birthdate">생년월일:</label>
+                <input type="text" id="birthdate" name="birthdate" placeholder="생년월일 8자리 (예: 19901020)" required>
+
+                <label for="gender">성별:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">선택</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                </select>
+
+                <label for="current_policy">현재 실손보험 가입 여부:</label>
+                <select id="current_policy" name="current_policy" required>
+                    <option value="none">가입 안 함 (신규 가입)</option>
+                    <option value="renewal">갱신형 실손보험 보유</option>
+                    <option value="non-renewal">비갱신형 실손보험 보유</option>
+                </select>
+
+                <label for="inquiry_type">상담 희망 내용:</label>
+                <select id="inquiry_type" name="inquiry_type" required>
+                    <option value="new">신규 가입 상담</option>
+                    <option value="compare">기존 보험 비교 분석</option>
+                    <option value="nonrenewal_maintain">비갱신형 유지/전환 문의</option>
+                    <option value="other">기타 문의</option>
+                </select>
+
+                <button type="submit">무료 견적 상담 신청</button>
+            </form>
+            <p class="small-info">개인정보 보호법에 따라 상담 이외의 목적으로는 사용되지 않습니다.</p>
+        </section>
+
+        <!-- Section 6: FAQ (Frequently Asked Questions) -->
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <p><strong>네이버 지식iN</strong>에서 <strong>'비갱신형 실손보험'</strong>을 검색한 사용자들이 궁금해하는 질문들을 모았습니다.</p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false" class="accordion-trigger">1. 비갱신형 실손보험은 1세대 실손보험인가요?</dt>
+                <dd class="accordion-content">
+                    비갱신형 실손보험은 1세대 실손보험(2009년 이전 가입 상품)과 2세대 실손보험(2009년 10월~2013년 3월 가입 상품) 초기에 주로 판매되었습니다. 이 시기 상품은 갱신 주기와 별도로 비갱신형으로 설정이 가능했습니다. 그러나 현재 판매되는 4세대 실손보험은 비갱신형 옵션이 없기 때문에, 비갱신형 실손보험을 유지하는 분들은 귀한 상품을 가지고 계신 것입니다.
+                </dd>
+                <dt tabindex="0" aria-expanded="false" class="accordion-trigger">2. 4세대 실손보험으로 전환하면 비갱신형 혜택이 사라지나요?</dt>
+                <dd class="accordion-content">
+                    네, 그렇습니다. 기존에 비갱신형 실손보험을 가지고 있더라도 4세대 실손보험으로 전환할 경우, 전환 시점부터 4세대 실손보험의 약관(1년 갱신형)을 따르게 됩니다. 4세대 실손보험으로 전환할 경우 보험료 부담이 줄어들 수 있으나, 비갱신형 혜택과 넓은 보장 범위(자기부담금, 비급여 항목 등)를 잃을 수 있으므로 신중하게 결정해야 합니다.
+                </dd>
+                <dt tabindex="0" aria-expanded="false" class="accordion-trigger">3. 비갱신형 실손보험을 무조건 유지하는 것이 좋을까요?</dt>
+                <dd class="accordion-content">
+                    꼭 그렇지만은 않습니다. 비갱신형 상품은 갱신형 상품에 비해 초기 보험료가 높고, 보장 한도나 내용이 현행 상품과 다를 수 있습니다. 특히 2026년 기준으로 4세대 실손보험은 비급여 항목에 대한 자기부담금이 생기는 등 보장이 축소되었지만, 건강한 젊은 층이나 의료 이용이 적은 사람에게는 보험료 할증제도를 통해 갱신형이 유리할 수 있습니다. 개인의 건강 상태와 재정 상황을 종합적으로 고려하여 전문가와 상담 후 결정해야 합니다.
+                </dd>
+                <dt tabindex="0" aria-expanded="false" class="accordion-trigger">4. 실손보험 가입 시 고지 의무는 무엇인가요?</dt>
+                <dd class="accordion-content">
+                    실손보험 가입 시 계약자는 과거 병력, 현재 건강 상태, 복용 중인 약 등에 대해 보험사에 사실대로 알릴 의무(고지 의무)가 있습니다. 고지 의무를 위반할 경우 보험 가입이 거절되거나, 추후 보험금 지급이 거절될 수 있습니다. 2026년 기준으로 보험사가 심사하는 고지 항목은 과거 5년 이내 입원, 수술, 7일 이상 통원 치료 여부 등입니다.
+                </dd>
+            </dl>
+        </section>
+
+        <!-- Section 7: External Links and Resources for Credibility -->
+        <section class="external-links">
+            <h2>신뢰할 수 있는 외부 정보 출처</h2>
+            <p>비갱신형 실손보험과 관련하여 더 자세한 정보 및 공식 자료는 아래 기관에서 확인하실 수 있습니다.</p>
+            <ul>
+                <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 금융감독원에서 제공하는 실손보험 표준 약관 및 소비자 유의사항을 확인하세요.</li>
+                <li><a href="https://www.koreains.or.kr/" target="_blank">대한민국 손해보험협회</a>: 실손보험 상품 비교 공시, 보험 정보 포털을 통해 다양한 정보를 얻을 수 있습니다.</li>
+                <li><a href="https://namu.wiki/w/%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98" target="_blank">실손보험 나무위키</a>: 실손보험의 역사, 세대별 특징, 주요 개념 등을 이해하기 쉽게 정리한 자료입니다.</li>
+                <li><a href="https://www.fsc.go.kr/index.jsp" target="_blank">금융위원회 (FSC)</a>: 실손보험 제도 개편 및 정책 방향에 대한 정부 공식 발표 자료를 확인할 수 있습니다.</li>
+                <li><a href="https://www.consumer.go.kr/consumer/index.do" target="_blank">한국소비자원</a>: 실손보험 관련 피해 사례 및 소비자 상담 정보를 확인할 수 있습니다.</li>
+            </ul>
+        </section>
+
+        <!-- Section 8: Call to Action -->
+        <section class="cta-section" style="text-align: center;">
+            <p><strong>비갱신형 실손보험 유지 여부, 4세대 실손보험 전환 여부 등 복잡한 고민은 전문가와 함께 해결하세요.</strong></p>
+            <a href="#quote" class="cta-button">무료 견적 상담 받기 </a>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2025 실손보험 비교 플랫폼. 모든 권리 보유.</p>
+    </footer>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                // 모든 dd 태그 숨기기
+                document.querySelectorAll('dl dd').forEach(dd => dd.style.display = 'none');
+                // 모든 dt 태그 active 클래스 제거
+                document.querySelectorAll('dl dt').forEach(item => item.classList.remove('active'));
+                
+                // 현재 클릭한 dt가 활성화되어 있지 않으면 활성화
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.nextElementSibling.style.display = 'block';
+                    dt.setAttribute('aria-expanded', 'true');
+                } else {
+                    dt.setAttribute('aria-expanded', 'false');
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+
+  
